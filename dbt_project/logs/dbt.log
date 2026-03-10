@@ -1,0 +1,2736 @@
+[0m23:21:22.665551 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e17464fbb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e172369f60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e172369ed0>]}
+
+
+============================== 23:21:22.762570 | 3f2ab2e7-7dbd-405a-867e-0023c8e2c688 ==============================
+[0m23:21:22.762570 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:21:22.769829 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'fail_fast': 'False', 'warn_error': 'None', 'log_path': '/usr/app/logs', 'version_check': 'True', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt run', 'introspect': 'True', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m23:21:23.929384 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e1723b45b0>]}
+[0m23:21:24.107937 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e1708f57b0>]}
+[0m23:21:24.112000 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:21:24.128872 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:21:24.138055 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m23:21:24.140315 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e1708f5de0>]}
+[0m23:21:25.674426 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e170771060>]}
+[0m23:21:25.876915 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e16b51bcd0>]}
+[0m23:21:25.878938 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:21:25.880676 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e16b51a0e0>]}
+[0m23:21:25.884033 [info ] [MainThread]: 
+[0m23:21:25.887069 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:21:25.891340 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:21:25.910380 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:21:25.912254 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:21:25.914144 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:21:26.359252 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:21:26.362128 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:21:26.366919 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:21:26.375318 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:21:26.377052 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:21:26.378605 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:21:26.419285 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:21:26.421222 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:21:26.423072 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:21:26.437293 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:21:26.440118 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:21:26.442084 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:21:26.448993 [debug] [MainThread]: Using postgres connection "master"
+[0m23:21:26.451098 [debug] [MainThread]: On master: BEGIN
+[0m23:21:26.452825 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:21:26.493927 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:21:26.495894 [debug] [MainThread]: Using postgres connection "master"
+[0m23:21:26.499188 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:21:26.521080 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:21:26.524124 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e16b55e620>]}
+[0m23:21:26.525893 [debug] [MainThread]: On master: ROLLBACK
+[0m23:21:26.528037 [debug] [MainThread]: Using postgres connection "master"
+[0m23:21:26.529685 [debug] [MainThread]: On master: BEGIN
+[0m23:21:26.531938 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:21:26.533460 [debug] [MainThread]: On master: COMMIT
+[0m23:21:26.535131 [debug] [MainThread]: Using postgres connection "master"
+[0m23:21:26.536684 [debug] [MainThread]: On master: COMMIT
+[0m23:21:26.538743 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:21:26.540267 [debug] [MainThread]: On master: Close
+[0m23:21:26.542088 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:21:26.543816 [info ] [MainThread]: 
+[0m23:21:26.766899 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:21:26.769301 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:21:26.772556 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:21:26.781623 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:21:26.795898 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:21:26.913962 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:21:26.784984 => 23:21:26.913534
+[0m23:21:26.915511 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:21:26.977575 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:21:27.003212 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:21:27.004426 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:21:27.005687 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:21:27.053132 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:21:27.054728 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:21:27.056549 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerID ,
+age ,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn,
+md5(customerid) AS customerhash,
+  );
+[0m23:21:27.089308 [debug] [Thread-1 (]: Postgres adapter: Postgres error: syntax error at or near ")"
+LINE 19:   );
+           ^
+
+[0m23:21:27.091142 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:21:27.093259 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:21:26.916882 => 23:21:27.092898
+[0m23:21:27.094758 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:21:27.127004 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  syntax error at or near ")"
+  LINE 19:   );
+             ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:21:27.129406 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3f2ab2e7-7dbd-405a-867e-0023c8e2c688', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e16b561300>]}
+[0m23:21:27.145893 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.36s]
+[0m23:21:27.149340 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:21:27.163481 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:21:27.165637 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:21:27.167828 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:21:27.198458 [debug] [MainThread]: Using postgres connection "master"
+[0m23:21:27.201619 [debug] [MainThread]: On master: BEGIN
+[0m23:21:27.203687 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:21:27.241737 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:21:27.243671 [debug] [MainThread]: On master: COMMIT
+[0m23:21:27.245434 [debug] [MainThread]: Using postgres connection "master"
+[0m23:21:27.247132 [debug] [MainThread]: On master: COMMIT
+[0m23:21:27.249107 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:21:27.251030 [debug] [MainThread]: On master: Close
+[0m23:21:27.253490 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:21:27.255554 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:21:27.257563 [info ] [MainThread]: 
+[0m23:21:27.259531 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 1.37 seconds (1.37s).
+[0m23:21:27.300045 [debug] [MainThread]: Command end result
+[0m23:21:27.338812 [info ] [MainThread]: 
+[0m23:21:27.341096 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:21:27.343911 [info ] [MainThread]: 
+[0m23:21:27.346768 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  syntax error at or near ")"
+  LINE 19:   );
+             ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:21:27.349212 [info ] [MainThread]: 
+[0m23:21:27.351937 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:21:27.367970 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 5.057443, "process_user_time": 7.725564, "process_kernel_time": 1.599273, "process_mem_max_rss": "110064", "process_in_blocks": "16", "process_out_blocks": "664", "command_success": false}
+[0m23:21:27.370938 [debug] [MainThread]: Command `dbt run` failed at 23:21:27.370702 after 5.07 seconds
+[0m23:21:27.372521 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e17464fbb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e170a3e5f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71e16b5f2650>]}
+[0m23:21:27.374193 [debug] [MainThread]: Flushing usage events
+[0m23:22:10.727359 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af67cbb50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af44a9f00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af44a9ea0>]}
+
+
+============================== 23:22:10.736545 | b9882470-946b-48ab-bd36-87f0eb0b8cfa ==============================
+[0m23:22:10.736545 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:22:10.738616 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'fail_fast': 'False', 'version_check': 'True', 'log_path': '/usr/app/logs', 'warn_error': 'None', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt run', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:22:11.008188 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b9882470-946b-48ab-bd36-87f0eb0b8cfa', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af504d420>]}
+[0m23:22:11.117087 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b9882470-946b-48ab-bd36-87f0eb0b8cfa', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af2c2fd60>]}
+[0m23:22:11.119825 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:22:11.150447 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:22:11.348789 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:22:11.351053 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:22:11.541821 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b9882470-946b-48ab-bd36-87f0eb0b8cfa', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af2930c10>]}
+[0m23:22:11.581427 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'b9882470-946b-48ab-bd36-87f0eb0b8cfa', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af29b9d50>]}
+[0m23:22:11.583069 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:22:11.584892 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b9882470-946b-48ab-bd36-87f0eb0b8cfa', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af29b9c60>]}
+[0m23:22:11.589121 [info ] [MainThread]: 
+[0m23:22:11.592164 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:22:11.596132 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:22:11.614179 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:22:11.616328 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:22:11.617898 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:22:11.652487 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:22:11.656848 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:22:11.661163 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:22:11.669959 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:22:11.671978 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:22:11.673797 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:22:11.699866 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:22:11.701860 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:22:11.703871 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:22:11.710668 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:22:11.713963 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:22:11.716245 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:22:11.727087 [debug] [MainThread]: Using postgres connection "master"
+[0m23:22:11.728752 [debug] [MainThread]: On master: BEGIN
+[0m23:22:11.730275 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:22:11.748203 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:22:11.750001 [debug] [MainThread]: Using postgres connection "master"
+[0m23:22:11.752547 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:22:11.765418 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:22:11.768136 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b9882470-946b-48ab-bd36-87f0eb0b8cfa', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af17560e0>]}
+[0m23:22:11.769904 [debug] [MainThread]: On master: ROLLBACK
+[0m23:22:11.772224 [debug] [MainThread]: Using postgres connection "master"
+[0m23:22:11.773906 [debug] [MainThread]: On master: BEGIN
+[0m23:22:11.776200 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:22:11.778197 [debug] [MainThread]: On master: COMMIT
+[0m23:22:11.780346 [debug] [MainThread]: Using postgres connection "master"
+[0m23:22:11.781857 [debug] [MainThread]: On master: COMMIT
+[0m23:22:11.783568 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:22:11.785198 [debug] [MainThread]: On master: Close
+[0m23:22:11.788752 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:22:11.790812 [info ] [MainThread]: 
+[0m23:22:11.808845 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:22:11.811379 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:22:11.814576 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:22:11.823036 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:22:11.842383 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:22:11.867561 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:22:11.825997 => 23:22:11.867011
+[0m23:22:11.868872 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:22:11.918411 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:22:11.931815 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:22:11.933854 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:22:11.935452 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:22:11.949196 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:22:11.952001 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:22:11.954421 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerID ,
+age ,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn,
+md5(customerid) AS customerhash
+  );
+[0m23:22:11.959055 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerID ,
+        ^
+
+[0m23:22:11.961374 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:22:11.963464 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:22:11.869809 => 23:22:11.963115
+[0m23:22:11.965166 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:22:11.969298 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID ,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:22:11.971987 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b9882470-946b-48ab-bd36-87f0eb0b8cfa', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af17f77c0>]}
+[0m23:22:11.974022 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.16s]
+[0m23:22:11.976789 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:22:11.980850 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:22:11.983130 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:22:11.986131 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:22:11.990708 [debug] [MainThread]: Using postgres connection "master"
+[0m23:22:11.992280 [debug] [MainThread]: On master: BEGIN
+[0m23:22:11.993519 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:22:12.010097 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:22:12.011724 [debug] [MainThread]: On master: COMMIT
+[0m23:22:12.012991 [debug] [MainThread]: Using postgres connection "master"
+[0m23:22:12.014527 [debug] [MainThread]: On master: COMMIT
+[0m23:22:12.016052 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:22:12.017349 [debug] [MainThread]: On master: Close
+[0m23:22:12.019056 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:22:12.020273 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:22:12.021910 [info ] [MainThread]: 
+[0m23:22:12.024974 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.43 seconds (0.43s).
+[0m23:22:12.028660 [debug] [MainThread]: Command end result
+[0m23:22:12.066021 [info ] [MainThread]: 
+[0m23:22:12.068403 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:22:12.071071 [info ] [MainThread]: 
+[0m23:22:12.077061 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID ,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:22:12.079568 [info ] [MainThread]: 
+[0m23:22:12.082311 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:22:12.086232 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.45751, "process_user_time": 5.16728, "process_kernel_time": 0.801968, "process_mem_max_rss": "110208", "process_out_blocks": "664", "command_success": false, "process_in_blocks": "0"}
+[0m23:22:12.089530 [debug] [MainThread]: Command `dbt run` failed at 23:22:12.088888 after 1.46 seconds
+[0m23:22:12.092027 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af67cbb50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af44f07c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x711af17f55a0>]}
+[0m23:22:12.094252 [debug] [MainThread]: Flushing usage events
+[0m23:22:59.600607 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84f95bbb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84d665f60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84d665f00>]}
+
+
+============================== 23:22:59.608315 | bb20fc25-8667-4dfa-be84-57e94a20cd01 ==============================
+[0m23:22:59.608315 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:22:59.610670 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'version_check': 'True', 'fail_fast': 'False', 'log_path': '/usr/app/logs', 'debug': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'invocation_command': 'dbt run', 'static_parser': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m23:22:59.887575 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'bb20fc25-8667-4dfa-be84-57e94a20cd01', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84be776a0>]}
+[0m23:22:59.993460 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'bb20fc25-8667-4dfa-be84-57e94a20cd01', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84bdf15a0>]}
+[0m23:22:59.995285 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:23:00.025931 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:23:00.173932 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:23:00.176352 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:23:00.362238 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'bb20fc25-8667-4dfa-be84-57e94a20cd01', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84a928c70>]}
+[0m23:23:00.402989 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'bb20fc25-8667-4dfa-be84-57e94a20cd01', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84bcaddb0>]}
+[0m23:23:00.405023 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:23:00.406835 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'bb20fc25-8667-4dfa-be84-57e94a20cd01', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84bcadcf0>]}
+[0m23:23:00.410940 [info ] [MainThread]: 
+[0m23:23:00.413937 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:23:00.518027 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:23:00.805900 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:23:00.809435 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:23:00.813002 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:23:01.076472 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:23:01.080681 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:23:01.091825 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:23:01.101414 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:23:01.103284 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:23:01.105061 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:23:01.139389 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:01.141221 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:23:01.142737 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:23:01.196850 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:23:01.200168 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:23:01.202322 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:23:01.210523 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:01.212059 [debug] [MainThread]: On master: BEGIN
+[0m23:23:01.213672 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:23:01.227031 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:01.228965 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:01.230684 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:23:01.237413 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:23:01.240376 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'bb20fc25-8667-4dfa-be84-57e94a20cd01', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84a8f5de0>]}
+[0m23:23:01.242656 [debug] [MainThread]: On master: ROLLBACK
+[0m23:23:01.244938 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:01.246312 [debug] [MainThread]: On master: BEGIN
+[0m23:23:01.248253 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:01.250078 [debug] [MainThread]: On master: COMMIT
+[0m23:23:01.251580 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:01.253144 [debug] [MainThread]: On master: COMMIT
+[0m23:23:01.255248 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:23:01.256752 [debug] [MainThread]: On master: Close
+[0m23:23:01.259276 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:23:01.261477 [info ] [MainThread]: 
+[0m23:23:01.278808 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:23:01.281520 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:23:01.284895 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:23:01.288459 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:23:01.309796 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:23:01.327230 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:23:01.290388 => 23:23:01.326774
+[0m23:23:01.329193 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:23:01.396395 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:23:01.405423 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:23:01.406967 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:23:01.408897 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:23:01.423069 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:01.424952 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:23:01.426356 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerID ,
+age ,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn,
+md5(customerID) AS customerhash
+  );
+[0m23:23:01.428862 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerID ,
+        ^
+
+[0m23:23:01.430415 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:23:01.432023 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:23:01.331959 => 23:23:01.431743
+[0m23:23:01.433174 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:23:01.437090 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID ,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:23:01.438518 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'bb20fc25-8667-4dfa-be84-57e94a20cd01', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84a9c7820>]}
+[0m23:23:01.439930 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.15s]
+[0m23:23:01.442159 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:23:01.445349 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:23:01.446943 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:23:01.448841 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:23:01.453133 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:01.454679 [debug] [MainThread]: On master: BEGIN
+[0m23:23:01.455966 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:23:01.470837 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:01.472069 [debug] [MainThread]: On master: COMMIT
+[0m23:23:01.473114 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:01.474009 [debug] [MainThread]: On master: COMMIT
+[0m23:23:01.475148 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:23:01.476149 [debug] [MainThread]: On master: Close
+[0m23:23:01.477663 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:23:01.478725 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:23:01.480656 [info ] [MainThread]: 
+[0m23:23:01.482608 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 1.07 seconds (1.07s).
+[0m23:23:01.485337 [debug] [MainThread]: Command end result
+[0m23:23:01.514608 [info ] [MainThread]: 
+[0m23:23:01.516340 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:23:01.518635 [info ] [MainThread]: 
+[0m23:23:01.520990 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID ,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:23:01.523398 [info ] [MainThread]: 
+[0m23:23:01.525684 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:23:01.531600 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 2.0051777, "process_user_time": 6.230951, "process_kernel_time": 0.792475, "process_mem_max_rss": "110044", "process_out_blocks": "664", "command_success": false, "process_in_blocks": "0"}
+[0m23:23:01.534186 [debug] [MainThread]: Command `dbt run` failed at 23:23:01.533809 after 2.01 seconds
+[0m23:23:01.535928 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84f95bbb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84bdf15a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71f84a9c5600>]}
+[0m23:23:01.537501 [debug] [MainThread]: Flushing usage events
+[0m23:23:36.052861 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c2c9e7bb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c2a711f60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c2a711f00>]}
+
+
+============================== 23:23:36.061180 | cd9bb057-7911-4d0b-8b0c-dfdb942d46ca ==============================
+[0m23:23:36.061180 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:23:36.063085 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'version_check': 'True', 'debug': 'False', 'log_path': '/usr/app/logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'invocation_command': 'dbt run', 'static_parser': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m23:23:36.319372 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'cd9bb057-7911-4d0b-8b0c-dfdb942d46ca', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c28f1f6a0>]}
+[0m23:23:36.435745 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'cd9bb057-7911-4d0b-8b0c-dfdb942d46ca', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c28c9d5a0>]}
+[0m23:23:36.438329 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:23:36.463450 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:23:36.655572 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:23:36.657683 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:23:36.949170 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'cd9bb057-7911-4d0b-8b0c-dfdb942d46ca', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c1b944c70>]}
+[0m23:23:36.981538 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'cd9bb057-7911-4d0b-8b0c-dfdb942d46ca', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c28b79db0>]}
+[0m23:23:36.983732 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:23:36.985589 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'cd9bb057-7911-4d0b-8b0c-dfdb942d46ca', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c28b79cf0>]}
+[0m23:23:36.990697 [info ] [MainThread]: 
+[0m23:23:36.993990 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:23:36.998209 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:23:37.025167 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:23:37.028390 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:23:37.030021 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:23:37.073894 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:23:37.076894 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:23:37.080932 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:23:37.090627 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:23:37.092787 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:23:37.095287 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:23:37.109208 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:37.110893 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:23:37.112425 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:23:37.118198 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:23:37.121126 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:23:37.122919 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:23:37.131828 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:37.133785 [debug] [MainThread]: On master: BEGIN
+[0m23:23:37.135503 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:23:37.149329 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:37.151642 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:37.153583 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:23:37.160732 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:23:37.163970 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'cd9bb057-7911-4d0b-8b0c-dfdb942d46ca', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c1b922140>]}
+[0m23:23:37.166038 [debug] [MainThread]: On master: ROLLBACK
+[0m23:23:37.168154 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:37.169923 [debug] [MainThread]: On master: BEGIN
+[0m23:23:37.172060 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:37.173665 [debug] [MainThread]: On master: COMMIT
+[0m23:23:37.175041 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:37.176371 [debug] [MainThread]: On master: COMMIT
+[0m23:23:37.178425 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:23:37.180342 [debug] [MainThread]: On master: Close
+[0m23:23:37.182614 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:23:37.184950 [info ] [MainThread]: 
+[0m23:23:37.196128 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:23:37.197955 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:23:37.200061 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:23:37.201740 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:23:37.214680 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:23:37.231258 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:23:37.203093 => 23:23:37.230768
+[0m23:23:37.232923 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:23:37.285293 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:23:37.303909 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:23:37.305652 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:23:37.307366 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:23:37.320530 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:37.322706 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:23:37.324684 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerID ,
+age ,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn
+  );
+[0m23:23:37.327143 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerID ,
+        ^
+
+[0m23:23:37.329053 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:23:37.331486 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:23:37.234633 => 23:23:37.331195
+[0m23:23:37.333394 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:23:37.337652 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID ,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:23:37.339657 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'cd9bb057-7911-4d0b-8b0c-dfdb942d46ca', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c1b813820>]}
+[0m23:23:37.341701 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.14s]
+[0m23:23:37.343885 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:23:37.346468 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:23:37.348105 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:23:37.349732 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:23:37.353778 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:37.355359 [debug] [MainThread]: On master: BEGIN
+[0m23:23:37.357002 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:23:37.370425 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:23:37.372364 [debug] [MainThread]: On master: COMMIT
+[0m23:23:37.374463 [debug] [MainThread]: Using postgres connection "master"
+[0m23:23:37.377248 [debug] [MainThread]: On master: COMMIT
+[0m23:23:37.380986 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:23:37.382844 [debug] [MainThread]: On master: Close
+[0m23:23:37.385150 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:23:37.386702 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:23:37.388538 [info ] [MainThread]: 
+[0m23:23:37.390383 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.40 seconds (0.40s).
+[0m23:23:37.394155 [debug] [MainThread]: Command end result
+[0m23:23:37.430664 [info ] [MainThread]: 
+[0m23:23:37.432862 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:23:37.435199 [info ] [MainThread]: 
+[0m23:23:37.437513 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID ,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:23:37.440443 [info ] [MainThread]: 
+[0m23:23:37.444182 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:23:37.447958 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.48466, "process_user_time": 5.522611, "process_kernel_time": 0.47716, "process_mem_max_rss": "109312", "process_out_blocks": "664", "command_success": false, "process_in_blocks": "0"}
+[0m23:23:37.450869 [debug] [MainThread]: Command `dbt run` failed at 23:23:37.450541 after 1.49 seconds
+[0m23:23:37.452866 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c2c9e7bb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c28c9d5a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a1c1b811600>]}
+[0m23:23:37.454619 [debug] [MainThread]: Flushing usage events
+[0m23:24:02.043734 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bc1993b50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbf6bdea0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbf6bde40>]}
+
+
+============================== 23:24:02.051688 | d9654b3e-4330-4587-b6c7-10db2e015fd6 ==============================
+[0m23:24:02.051688 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:24:02.053851 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'debug': 'False', 'version_check': 'True', 'log_path': '/usr/app/logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt run', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:24:02.341683 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'd9654b3e-4330-4587-b6c7-10db2e015fd6', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bc00cd450>]}
+[0m23:24:02.482500 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'd9654b3e-4330-4587-b6c7-10db2e015fd6', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbdc4ab00>]}
+[0m23:24:02.485479 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:24:02.511071 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:24:02.664794 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:24:02.667011 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:24:02.853495 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'd9654b3e-4330-4587-b6c7-10db2e015fd6', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbc954bb0>]}
+[0m23:24:02.891142 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'd9654b3e-4330-4587-b6c7-10db2e015fd6', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbdbd9cf0>]}
+[0m23:24:02.893391 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:24:02.895367 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd9654b3e-4330-4587-b6c7-10db2e015fd6', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbdbd9c30>]}
+[0m23:24:02.899105 [info ] [MainThread]: 
+[0m23:24:02.901863 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:24:02.906660 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:24:02.926272 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:24:02.928161 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:24:02.929905 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:24:02.960855 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:24:02.963706 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:24:02.968631 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:24:02.977134 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:24:02.978959 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:24:02.980794 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:24:02.994379 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:02.996469 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:24:02.998444 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:24:03.003913 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:24:03.007072 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:24:03.009166 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:24:03.016314 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:03.018441 [debug] [MainThread]: On master: BEGIN
+[0m23:24:03.020130 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:24:03.032131 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:03.034239 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:03.035816 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:24:03.041685 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:24:03.044845 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd9654b3e-4330-4587-b6c7-10db2e015fd6', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbc932080>]}
+[0m23:24:03.046952 [debug] [MainThread]: On master: ROLLBACK
+[0m23:24:03.048894 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:03.050253 [debug] [MainThread]: On master: BEGIN
+[0m23:24:03.052411 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:03.053943 [debug] [MainThread]: On master: COMMIT
+[0m23:24:03.055414 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:03.057117 [debug] [MainThread]: On master: COMMIT
+[0m23:24:03.058676 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:24:03.060560 [debug] [MainThread]: On master: Close
+[0m23:24:03.062817 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:24:03.064904 [info ] [MainThread]: 
+[0m23:24:03.078735 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:24:03.081506 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:24:03.085986 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:24:03.089405 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:24:03.102521 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:24:03.124906 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:24:03.091732 => 23:24:03.124375
+[0m23:24:03.126453 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:24:03.173703 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:24:03.187712 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:24:03.189383 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:24:03.190873 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:24:03.203464 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:03.205299 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:24:03.206997 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerID,
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn
+  );
+[0m23:24:03.209379 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerID,
+        ^
+
+[0m23:24:03.210894 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:24:03.212955 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:24:03.127824 => 23:24:03.212665
+[0m23:24:03.214299 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:24:03.217982 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:24:03.220071 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'd9654b3e-4330-4587-b6c7-10db2e015fd6', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbc823760>]}
+[0m23:24:03.222004 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.14s]
+[0m23:24:03.224774 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:24:03.228406 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:24:03.230546 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:24:03.233159 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:24:03.237583 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:03.239463 [debug] [MainThread]: On master: BEGIN
+[0m23:24:03.240869 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:24:03.255890 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:03.257762 [debug] [MainThread]: On master: COMMIT
+[0m23:24:03.259554 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:03.261266 [debug] [MainThread]: On master: COMMIT
+[0m23:24:03.264770 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:24:03.267633 [debug] [MainThread]: On master: Close
+[0m23:24:03.271276 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:24:03.273778 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:24:03.275773 [info ] [MainThread]: 
+[0m23:24:03.277923 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.37 seconds (0.37s).
+[0m23:24:03.281209 [debug] [MainThread]: Command end result
+[0m23:24:03.317043 [info ] [MainThread]: 
+[0m23:24:03.319869 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:24:03.323134 [info ] [MainThread]: 
+[0m23:24:03.325420 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerID,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:24:03.328205 [info ] [MainThread]: 
+[0m23:24:03.330797 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:24:03.334782 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.4193752, "process_user_time": 5.409188, "process_kernel_time": 0.724031, "process_mem_max_rss": "110188", "process_in_blocks": "312", "process_out_blocks": "664", "command_success": false}
+[0m23:24:03.338975 [debug] [MainThread]: Command `dbt run` failed at 23:24:03.338240 after 1.42 seconds
+[0m23:24:03.341557 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bc1993b50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbc822ec0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x768bbc822200>]}
+[0m23:24:03.343166 [debug] [MainThread]: Flushing usage events
+[0m23:24:45.131245 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761824b47b50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761822855f00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761822855ea0>]}
+
+
+============================== 23:24:45.138999 | b0cd6080-3ff2-4882-9b60-bc407fded185 ==============================
+[0m23:24:45.138999 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:24:45.141323 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'fail_fast': 'False', 'log_path': '/usr/app/logs', 'profiles_dir': '/usr/app', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'introspect': 'True', 'invocation_command': 'dbt run', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:24:45.405958 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b0cd6080-3ff2-4882-9b60-bc407fded185', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7618233ad420>]}
+[0m23:24:45.708945 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b0cd6080-3ff2-4882-9b60-bc407fded185', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761820fdfd60>]}
+[0m23:24:45.711551 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:24:45.742994 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:24:45.883173 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:24:45.884544 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:24:46.094286 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b0cd6080-3ff2-4882-9b60-bc407fded185', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761820118c10>]}
+[0m23:24:46.131736 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'b0cd6080-3ff2-4882-9b60-bc407fded185', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761820e99d50>]}
+[0m23:24:46.133925 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:24:46.136201 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b0cd6080-3ff2-4882-9b60-bc407fded185', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761820e99c60>]}
+[0m23:24:46.141179 [info ] [MainThread]: 
+[0m23:24:46.144950 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:24:46.149130 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:24:46.173933 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:24:46.175739 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:24:46.177361 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:24:46.239664 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:24:46.242195 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:24:46.245682 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:24:46.254205 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:24:46.255498 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:24:46.256528 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:24:46.268275 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:46.270354 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:24:46.272367 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:24:46.278348 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:24:46.281250 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:24:46.283482 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:24:46.290489 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:46.292146 [debug] [MainThread]: On master: BEGIN
+[0m23:24:46.293776 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:24:46.305340 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:46.307443 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:46.309123 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:24:46.315033 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:24:46.317713 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b0cd6080-3ff2-4882-9b60-bc407fded185', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7618200e60e0>]}
+[0m23:24:46.319496 [debug] [MainThread]: On master: ROLLBACK
+[0m23:24:46.321428 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:46.323163 [debug] [MainThread]: On master: BEGIN
+[0m23:24:46.325287 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:46.326825 [debug] [MainThread]: On master: COMMIT
+[0m23:24:46.328120 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:46.329489 [debug] [MainThread]: On master: COMMIT
+[0m23:24:46.331122 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:24:46.332554 [debug] [MainThread]: On master: Close
+[0m23:24:46.334316 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:24:46.339394 [info ] [MainThread]: 
+[0m23:24:46.353348 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:24:46.356481 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:24:46.360208 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:24:46.362155 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:24:46.374512 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:24:46.392115 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:24:46.363560 => 23:24:46.391629
+[0m23:24:46.394042 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:24:46.441975 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:24:46.460044 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:24:46.461875 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:24:46.463534 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:24:46.490932 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:46.492830 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:24:46.494504 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerid,
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn
+  );
+[0m23:24:46.496932 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerid,
+        ^
+
+[0m23:24:46.498975 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:24:46.501358 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:24:46.395437 => 23:24:46.501040
+[0m23:24:46.502854 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:24:46.506721 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:24:46.508646 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b0cd6080-3ff2-4882-9b60-bc407fded185', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7618201bb7c0>]}
+[0m23:24:46.510552 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.15s]
+[0m23:24:46.512925 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:24:46.516773 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:24:46.519068 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:24:46.521489 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:24:46.526500 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:46.528601 [debug] [MainThread]: On master: BEGIN
+[0m23:24:46.530664 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:24:46.546955 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:24:46.549068 [debug] [MainThread]: On master: COMMIT
+[0m23:24:46.552073 [debug] [MainThread]: Using postgres connection "master"
+[0m23:24:46.554925 [debug] [MainThread]: On master: COMMIT
+[0m23:24:46.557034 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:24:46.558786 [debug] [MainThread]: On master: Close
+[0m23:24:46.561068 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:24:46.562672 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:24:46.564414 [info ] [MainThread]: 
+[0m23:24:46.566660 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.42 seconds (0.42s).
+[0m23:24:46.572554 [debug] [MainThread]: Command end result
+[0m23:24:46.609200 [info ] [MainThread]: 
+[0m23:24:46.611349 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:24:46.613583 [info ] [MainThread]: 
+[0m23:24:46.615597 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:24:46.619477 [info ] [MainThread]: 
+[0m23:24:46.622012 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:24:46.625785 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.5744737, "process_user_time": 5.168535, "process_kernel_time": 0.428689, "process_mem_max_rss": "109924", "process_out_blocks": "664", "command_success": false, "process_in_blocks": "0"}
+[0m23:24:46.628321 [debug] [MainThread]: Command `dbt run` failed at 23:24:46.627964 after 1.58 seconds
+[0m23:24:46.630728 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x761824b47b50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7618228987c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7618201b95a0>]}
+[0m23:24:46.633760 [debug] [MainThread]: Flushing usage events
+[0m23:28:13.230706 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f196bf7b20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f194905ed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f194905e70>]}
+
+
+============================== 23:28:13.259060 | fe647b6c-84ac-471b-9bc3-f57f4df2b509 ==============================
+[0m23:28:13.259060 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:28:13.261482 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'debug': 'False', 'version_check': 'True', 'log_path': '/usr/app/logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'log_format': 'default', 'invocation_command': 'dbt run', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:28:13.758123 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'fe647b6c-84ac-471b-9bc3-f57f4df2b509', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f1954593f0>]}
+[0m23:28:13.984729 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'fe647b6c-84ac-471b-9bc3-f57f4df2b509', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f19308d4e0>]}
+[0m23:28:13.987280 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:28:14.028995 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:28:14.406294 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m23:28:14.408127 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m23:28:14.415951 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'fe647b6c-84ac-471b-9bc3-f57f4df2b509', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f192e600d0>]}
+[0m23:28:14.459223 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'fe647b6c-84ac-471b-9bc3-f57f4df2b509', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f192f49d20>]}
+[0m23:28:14.461408 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:28:14.463506 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'fe647b6c-84ac-471b-9bc3-f57f4df2b509', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f192f49c60>]}
+[0m23:28:14.468052 [info ] [MainThread]: 
+[0m23:28:14.471807 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:28:14.475980 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:28:14.498928 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:28:14.501083 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:28:14.502865 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:28:14.534457 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:28:14.537398 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:28:14.542179 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:28:14.551064 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:28:14.553131 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:28:14.555047 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:28:14.568139 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:28:14.570149 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:28:14.572042 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:28:14.579616 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:28:14.583047 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:28:14.585173 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:28:14.592140 [debug] [MainThread]: Using postgres connection "master"
+[0m23:28:14.593900 [debug] [MainThread]: On master: BEGIN
+[0m23:28:14.595644 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:28:14.957025 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:28:14.960159 [debug] [MainThread]: Using postgres connection "master"
+[0m23:28:14.963716 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:28:15.101259 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:28:15.104151 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'fe647b6c-84ac-471b-9bc3-f57f4df2b509', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f192c9f490>]}
+[0m23:28:15.106141 [debug] [MainThread]: On master: ROLLBACK
+[0m23:28:15.108193 [debug] [MainThread]: Using postgres connection "master"
+[0m23:28:15.109787 [debug] [MainThread]: On master: BEGIN
+[0m23:28:15.111977 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:28:15.113595 [debug] [MainThread]: On master: COMMIT
+[0m23:28:15.115126 [debug] [MainThread]: Using postgres connection "master"
+[0m23:28:15.116675 [debug] [MainThread]: On master: COMMIT
+[0m23:28:15.117965 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:28:15.119105 [debug] [MainThread]: On master: Close
+[0m23:28:15.121007 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:28:15.123244 [info ] [MainThread]: 
+[0m23:28:15.186597 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:28:15.188404 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:28:15.191359 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:28:15.194399 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:28:15.232706 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:28:15.245714 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:28:15.195962 => 23:28:15.245243
+[0m23:28:15.247096 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:28:15.338119 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:28:15.354499 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:28:15.356714 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:28:15.358434 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:28:15.374561 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:28:15.376126 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:28:15.377300 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerid,
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn
+  );
+[0m23:28:15.379265 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerid,
+        ^
+
+[0m23:28:15.380585 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:28:15.382488 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:28:15.248241 => 23:28:15.382042
+[0m23:28:15.383970 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:28:15.391992 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:28:15.394353 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'fe647b6c-84ac-471b-9bc3-f57f4df2b509', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f192d32d40>]}
+[0m23:28:15.396981 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.20s]
+[0m23:28:15.399752 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:28:15.403622 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:28:15.406157 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:28:15.409093 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:28:15.414390 [debug] [MainThread]: Using postgres connection "master"
+[0m23:28:15.416757 [debug] [MainThread]: On master: BEGIN
+[0m23:28:15.418998 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:28:15.436075 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:28:15.439204 [debug] [MainThread]: On master: COMMIT
+[0m23:28:15.441833 [debug] [MainThread]: Using postgres connection "master"
+[0m23:28:15.445380 [debug] [MainThread]: On master: COMMIT
+[0m23:28:15.448028 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:28:15.450007 [debug] [MainThread]: On master: Close
+[0m23:28:15.452456 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:28:15.454313 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:28:15.456230 [info ] [MainThread]: 
+[0m23:28:15.459192 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.99 seconds (0.99s).
+[0m23:28:15.462290 [debug] [MainThread]: Command end result
+[0m23:28:15.499764 [info ] [MainThread]: 
+[0m23:28:15.502293 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:28:15.504507 [info ] [MainThread]: 
+[0m23:28:15.506955 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:28:15.509849 [info ] [MainThread]: 
+[0m23:28:15.512217 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:28:15.520367 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 2.3619058, "process_user_time": 5.644432, "process_kernel_time": 0.894957, "process_mem_max_rss": "107620", "process_in_blocks": "200", "process_out_blocks": "664", "command_success": false}
+[0m23:28:15.523964 [debug] [MainThread]: Command `dbt run` failed at 23:28:15.523572 after 2.37 seconds
+[0m23:28:15.526886 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f196bf7b20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f192cfd1b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78f192cfe8f0>]}
+[0m23:28:15.528858 [debug] [MainThread]: Flushing usage events
+[0m23:31:12.296344 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc9b2fb80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc7849f30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc7849ed0>]}
+
+
+============================== 23:31:12.304731 | 6bc2225e-aad8-4d94-bfbe-7a503e93a692 ==============================
+[0m23:31:12.304731 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:31:12.307092 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'profiles_dir': '/usr/app', 'log_path': '/usr/app/logs', 'fail_fast': 'False', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt run', 'static_parser': 'True', 'introspect': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m23:31:12.641808 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '6bc2225e-aad8-4d94-bfbe-7a503e93a692', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc788c580>]}
+[0m23:31:12.879146 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '6bc2225e-aad8-4d94-bfbe-7a503e93a692', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc5dd24d0>]}
+[0m23:31:12.882341 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:31:12.924625 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:31:13.153808 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:31:13.155885 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:31:13.763974 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '6bc2225e-aad8-4d94-bfbe-7a503e93a692', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc4adcc40>]}
+[0m23:31:13.837553 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '6bc2225e-aad8-4d94-bfbe-7a503e93a692', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc5d61d80>]}
+[0m23:31:13.839009 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:31:13.840940 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6bc2225e-aad8-4d94-bfbe-7a503e93a692', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc5d61c90>]}
+[0m23:31:13.846422 [info ] [MainThread]: 
+[0m23:31:13.849767 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:31:13.854608 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:31:13.880339 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:31:13.882612 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:31:13.884458 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:31:13.983703 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:31:13.986702 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:31:13.990825 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:31:13.998886 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:31:14.000606 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:31:14.002175 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:31:14.031432 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:14.033350 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:31:14.034727 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:31:14.061538 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:31:14.067667 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:31:14.071522 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:31:14.086041 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:14.088346 [debug] [MainThread]: On master: BEGIN
+[0m23:31:14.090789 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:31:14.110358 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:14.112696 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:14.114827 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:31:14.120875 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:31:14.124430 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6bc2225e-aad8-4d94-bfbe-7a503e93a692', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc4b0e110>]}
+[0m23:31:14.126982 [debug] [MainThread]: On master: ROLLBACK
+[0m23:31:14.129157 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:14.130842 [debug] [MainThread]: On master: BEGIN
+[0m23:31:14.132846 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:14.134149 [debug] [MainThread]: On master: COMMIT
+[0m23:31:14.135475 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:14.136733 [debug] [MainThread]: On master: COMMIT
+[0m23:31:14.138281 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:31:14.139662 [debug] [MainThread]: On master: Close
+[0m23:31:14.141757 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:31:14.143517 [info ] [MainThread]: 
+[0m23:31:14.157890 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:31:14.159734 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:31:14.162366 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:31:14.164343 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:31:14.199464 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:31:14.218324 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:31:14.166060 => 23:31:14.217913
+[0m23:31:14.219833 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:31:14.265597 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:31:14.280688 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:31:14.282067 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:31:14.283390 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:31:14.319224 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:14.321421 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:31:14.323542 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+customerid,
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+contracttype,
+internetservice,
+COALESCE(totalcharges,0) AS totalcharges, 
+techsupport,
+churn
+  );
+[0m23:31:14.326368 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerid,
+        ^
+
+[0m23:31:14.328272 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:31:14.330429 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:31:14.221036 => 23:31:14.330144
+[0m23:31:14.332240 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:31:14.338505 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:31:14.340556 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '6bc2225e-aad8-4d94-bfbe-7a503e93a692', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc49ab7f0>]}
+[0m23:31:14.343080 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.18s]
+[0m23:31:14.345759 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:31:14.348191 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:31:14.349938 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:31:14.351539 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:31:14.356229 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:14.358307 [debug] [MainThread]: On master: BEGIN
+[0m23:31:14.360043 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:31:14.378371 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:14.380014 [debug] [MainThread]: On master: COMMIT
+[0m23:31:14.381452 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:14.383033 [debug] [MainThread]: On master: COMMIT
+[0m23:31:14.384864 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:31:14.386808 [debug] [MainThread]: On master: Close
+[0m23:31:14.388952 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:31:14.390771 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:31:14.393598 [info ] [MainThread]: 
+[0m23:31:14.397005 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.54 seconds (0.54s).
+[0m23:31:14.399795 [debug] [MainThread]: Command end result
+[0m23:31:14.435346 [info ] [MainThread]: 
+[0m23:31:14.437507 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:31:14.439987 [info ] [MainThread]: 
+[0m23:31:14.444067 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:31:14.446343 [info ] [MainThread]: 
+[0m23:31:14.448876 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:31:14.452279 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 2.3398051, "process_user_time": 5.64036, "process_kernel_time": 1.061877, "process_mem_max_rss": "109736", "process_in_blocks": "688", "process_out_blocks": "664", "command_success": false}
+[0m23:31:14.454626 [debug] [MainThread]: Command `dbt run` failed at 23:31:14.454305 after 2.34 seconds
+[0m23:31:14.456909 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc9b2fb80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc5f0c400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x780dc49ab1f0>]}
+[0m23:31:14.460557 [debug] [MainThread]: Flushing usage events
+[0m23:31:39.336948 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea99345bb50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea991175f00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea991175ea0>]}
+
+
+============================== 23:31:39.345280 | fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f ==============================
+[0m23:31:39.345280 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:31:39.347765 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'version_check': 'True', 'log_path': '/usr/app/logs', 'profiles_dir': '/usr/app', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt run', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:31:39.614355 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea991b91420>]}
+[0m23:31:39.720105 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea98f703d60>]}
+[0m23:31:39.722486 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:31:39.749007 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:31:39.935276 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:31:39.938811 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:31:40.259698 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea98e410c10>]}
+[0m23:31:40.320640 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea98f5e1d50>]}
+[0m23:31:40.322627 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:31:40.324863 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea98f5e1c60>]}
+[0m23:31:40.329763 [info ] [MainThread]: 
+[0m23:31:40.332952 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:31:40.337671 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:31:40.358282 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:31:40.360534 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:31:40.362870 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:31:40.449153 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:31:40.451641 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:31:40.456476 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:31:40.469793 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:31:40.471687 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:31:40.473271 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:31:40.516006 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:40.517565 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:31:40.519159 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:31:40.532007 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:31:40.535050 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:31:40.537150 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:31:40.548176 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:40.550821 [debug] [MainThread]: On master: BEGIN
+[0m23:31:40.553234 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:31:40.568363 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:40.570295 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:40.572025 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:31:40.706380 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:31:40.709813 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea98e3ee0e0>]}
+[0m23:31:40.711858 [debug] [MainThread]: On master: ROLLBACK
+[0m23:31:40.713995 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:40.715803 [debug] [MainThread]: On master: BEGIN
+[0m23:31:40.718249 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:40.720337 [debug] [MainThread]: On master: COMMIT
+[0m23:31:40.722201 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:40.723907 [debug] [MainThread]: On master: COMMIT
+[0m23:31:40.726029 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:31:40.727798 [debug] [MainThread]: On master: Close
+[0m23:31:40.730312 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:31:40.745707 [info ] [MainThread]: 
+[0m23:31:40.765079 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:31:40.767945 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:31:40.771361 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:31:40.773672 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:31:40.785781 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:31:40.802941 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:31:40.775188 => 23:31:40.802395
+[0m23:31:40.804805 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:31:40.855915 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:31:40.872585 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:31:40.874051 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:31:40.875515 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:31:41.062136 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:41.067004 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:31:41.071381 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT 
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+contracttype,
+internetservice,
+COALESCE(totalcharges,0) AS totalcharges, 
+techsupport,
+churn
+  );
+[0m23:31:41.077388 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "age" does not exist
+LINE 8: age,
+        ^
+
+[0m23:31:41.080253 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:31:41.083515 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:31:40.806352 => 23:31:41.082977
+[0m23:31:41.086135 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:31:41.092939 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "age" does not exist
+  LINE 8: age,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:31:41.095934 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'fb8dc80b-f30a-4fd3-b40f-5e1a4985db9f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea98e2db7c0>]}
+[0m23:31:41.099088 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.33s]
+[0m23:31:41.103073 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:31:41.107982 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:31:41.111047 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:31:41.114514 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:31:41.121920 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:41.124717 [debug] [MainThread]: On master: BEGIN
+[0m23:31:41.126956 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:31:41.184612 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:31:41.186497 [debug] [MainThread]: On master: COMMIT
+[0m23:31:41.188132 [debug] [MainThread]: Using postgres connection "master"
+[0m23:31:41.189620 [debug] [MainThread]: On master: COMMIT
+[0m23:31:41.191624 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:31:41.193203 [debug] [MainThread]: On master: Close
+[0m23:31:41.196050 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:31:41.198705 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:31:41.200508 [info ] [MainThread]: 
+[0m23:31:41.202190 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.87 seconds (0.87s).
+[0m23:31:41.204478 [debug] [MainThread]: Command end result
+[0m23:31:41.238492 [info ] [MainThread]: 
+[0m23:31:41.240773 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:31:41.242793 [info ] [MainThread]: 
+[0m23:31:41.245914 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "age" does not exist
+  LINE 8: age,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:31:41.250209 [info ] [MainThread]: 
+[0m23:31:41.253795 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:31:41.258015 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.9918418, "process_user_time": 5.919457, "process_kernel_time": 0.538511, "process_mem_max_rss": "110012", "process_out_blocks": "664", "command_success": false, "process_in_blocks": "0"}
+[0m23:31:41.261347 [debug] [MainThread]: Command `dbt run` failed at 23:31:41.260691 after 2.00 seconds
+[0m23:31:41.263551 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea99345bb50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea9911bc7c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ea98e2d95a0>]}
+[0m23:31:41.265846 [debug] [MainThread]: Flushing usage events
+[0m23:32:05.271035 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724cf0f0bb80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ceebedf30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ceebeded0>]}
+
+
+============================== 23:32:05.279279 | 95173f78-9369-4345-aac2-13b57ef5da7f ==============================
+[0m23:32:05.279279 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:32:05.281187 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'debug': 'False', 'log_path': '/usr/app/logs', 'profiles_dir': '/usr/app', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'introspect': 'True', 'static_parser': 'True', 'invocation_command': 'dbt run', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m23:32:05.539560 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '95173f78-9369-4345-aac2-13b57ef5da7f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ceec30580>]}
+[0m23:32:05.645862 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '95173f78-9369-4345-aac2-13b57ef5da7f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ced36e4d0>]}
+[0m23:32:05.648178 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:32:05.674895 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:32:05.872036 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:32:05.875073 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:32:06.229662 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '95173f78-9369-4345-aac2-13b57ef5da7f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ced06cc40>]}
+[0m23:32:06.258069 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '95173f78-9369-4345-aac2-13b57ef5da7f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ced0f9d80>]}
+[0m23:32:06.259989 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:32:06.261923 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '95173f78-9369-4345-aac2-13b57ef5da7f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ced0f9c90>]}
+[0m23:32:06.265298 [info ] [MainThread]: 
+[0m23:32:06.267825 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:32:06.271105 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:32:06.288307 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:32:06.291115 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:32:06.293037 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:32:06.326748 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:32:06.330034 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:32:06.334404 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:32:06.345941 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:32:06.347339 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:32:06.348960 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:32:06.363805 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:32:06.365395 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:32:06.367136 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:32:06.372955 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:32:06.376048 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:32:06.378156 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:32:06.386868 [debug] [MainThread]: Using postgres connection "master"
+[0m23:32:06.388276 [debug] [MainThread]: On master: BEGIN
+[0m23:32:06.389431 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:32:06.402021 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:32:06.403986 [debug] [MainThread]: Using postgres connection "master"
+[0m23:32:06.405855 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:32:06.412256 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:32:06.415001 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '95173f78-9369-4345-aac2-13b57ef5da7f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724cec09a110>]}
+[0m23:32:06.416662 [debug] [MainThread]: On master: ROLLBACK
+[0m23:32:06.418300 [debug] [MainThread]: Using postgres connection "master"
+[0m23:32:06.419658 [debug] [MainThread]: On master: BEGIN
+[0m23:32:06.421746 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:32:06.423217 [debug] [MainThread]: On master: COMMIT
+[0m23:32:06.425228 [debug] [MainThread]: Using postgres connection "master"
+[0m23:32:06.427334 [debug] [MainThread]: On master: COMMIT
+[0m23:32:06.429697 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:32:06.432428 [debug] [MainThread]: On master: Close
+[0m23:32:06.435518 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:32:06.437882 [info ] [MainThread]: 
+[0m23:32:06.448902 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:32:06.450717 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:32:06.453255 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:32:06.455109 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:32:06.469258 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:32:06.481331 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:32:06.457068 => 23:32:06.480905
+[0m23:32:06.482899 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:32:06.534511 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:32:06.548426 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:32:06.550228 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:32:06.551803 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:32:06.564425 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:32:06.565890 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:32:06.567414 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT
+customerid,
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+contracttype,
+internetservice,
+COALESCE(totalcharges,0) AS totalcharges, 
+techsupport,
+churn
+  );
+[0m23:32:06.569585 [debug] [Thread-1 (]: Postgres adapter: Postgres error: column "customerid" does not exist
+LINE 8: customerid,
+        ^
+
+[0m23:32:06.571161 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: ROLLBACK
+[0m23:32:06.573520 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:32:06.484676 => 23:32:06.572941
+[0m23:32:06.575516 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:32:06.579398 [debug] [Thread-1 (]: Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:32:06.598734 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '95173f78-9369-4345-aac2-13b57ef5da7f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724cec13b7f0>]}
+[0m23:32:06.608257 [error] [Thread-1 (]: 1 of 2 ERROR creating sql view model staging.stg_churn ......................... [[31mERROR[0m in 0.15s]
+[0m23:32:06.610826 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:32:06.613589 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:32:06.615306 [info ] [Thread-1 (]: 2 of 2 SKIP relation staging.churn_report ...................................... [[33mSKIP[0m]
+[0m23:32:06.616894 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:32:06.620501 [debug] [MainThread]: Using postgres connection "master"
+[0m23:32:06.621980 [debug] [MainThread]: On master: BEGIN
+[0m23:32:06.623450 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:32:06.811203 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:32:06.813087 [debug] [MainThread]: On master: COMMIT
+[0m23:32:06.814798 [debug] [MainThread]: Using postgres connection "master"
+[0m23:32:06.816278 [debug] [MainThread]: On master: COMMIT
+[0m23:32:06.818257 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:32:06.819836 [debug] [MainThread]: On master: Close
+[0m23:32:06.821891 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:32:06.823599 [debug] [MainThread]: Connection 'model.churn_pipeline.stg_churn' was properly closed.
+[0m23:32:06.825064 [info ] [MainThread]: 
+[0m23:32:06.827020 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 0.56 seconds (0.56s).
+[0m23:32:06.830386 [debug] [MainThread]: Command end result
+[0m23:32:06.865293 [info ] [MainThread]: 
+[0m23:32:06.867608 [info ] [MainThread]: [31mCompleted with 1 error and 0 warnings:[0m
+[0m23:32:06.870058 [info ] [MainThread]: 
+[0m23:32:06.872618 [error] [MainThread]:   Database Error in model stg_churn (models/staging/stg_churn.sql)
+  column "customerid" does not exist
+  LINE 8: customerid,
+          ^
+  compiled Code at target/run/churn_pipeline/models/staging/stg_churn.sql
+[0m23:32:06.876837 [info ] [MainThread]: 
+[0m23:32:06.880320 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=1 TOTAL=2
+[0m23:32:06.888268 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 1.7060711, "process_user_time": 5.260286, "process_kernel_time": 0.560762, "process_mem_max_rss": "110116", "process_in_blocks": "344", "process_out_blocks": "664", "command_success": false}
+[0m23:32:06.891357 [debug] [MainThread]: Command `dbt run` failed at 23:32:06.890374 after 1.71 seconds
+[0m23:32:06.894166 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724cf0f0bb80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724ced2a8400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x724cec13b1f0>]}
+[0m23:32:06.896134 [debug] [MainThread]: Flushing usage events
+[0m23:36:22.245071 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7bd7abbb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7bb48df60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7bb48df00>]}
+
+
+============================== 23:36:22.293496 | c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0 ==============================
+[0m23:36:22.293496 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:36:22.295596 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'debug': 'False', 'version_check': 'True', 'log_path': '/usr/app/logs', 'warn_error': 'None', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt run', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m23:36:22.558692 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b9c976a0>]}
+[0m23:36:22.673715 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b9c0d5a0>]}
+[0m23:36:22.675967 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:36:22.703388 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:36:23.078084 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m23:36:23.080353 [debug] [MainThread]: Partial parsing: updated file: churn_pipeline://models/staging/stg_churn.sql
+[0m23:36:23.517961 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b9918c70>]}
+[0m23:36:23.616774 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b9ac5db0>]}
+[0m23:36:23.619104 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:36:23.621147 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b9ac5cf0>]}
+[0m23:36:23.624831 [info ] [MainThread]: 
+[0m23:36:23.627444 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:36:23.631524 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:36:23.663589 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:36:23.665644 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:36:23.667766 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:36:23.710965 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:36:23.714972 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:36:23.720121 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:36:23.728439 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:36:23.730300 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:36:23.732065 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:36:23.763438 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:36:23.765622 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:36:23.767842 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:36:23.775418 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:36:23.778271 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:36:23.780204 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:36:23.788696 [debug] [MainThread]: Using postgres connection "master"
+[0m23:36:23.790459 [debug] [MainThread]: On master: BEGIN
+[0m23:36:23.791974 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:36:23.805804 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:36:23.807742 [debug] [MainThread]: Using postgres connection "master"
+[0m23:36:23.809564 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:36:23.815605 [debug] [MainThread]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:36:23.818571 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b873e140>]}
+[0m23:36:23.820442 [debug] [MainThread]: On master: ROLLBACK
+[0m23:36:23.822488 [debug] [MainThread]: Using postgres connection "master"
+[0m23:36:23.823938 [debug] [MainThread]: On master: BEGIN
+[0m23:36:23.826364 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:36:23.828019 [debug] [MainThread]: On master: COMMIT
+[0m23:36:23.829551 [debug] [MainThread]: Using postgres connection "master"
+[0m23:36:23.831071 [debug] [MainThread]: On master: COMMIT
+[0m23:36:23.832807 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:36:23.834864 [debug] [MainThread]: On master: Close
+[0m23:36:23.837143 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:36:23.839124 [info ] [MainThread]: 
+[0m23:36:23.853063 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:36:23.855752 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:36:23.859590 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:36:23.862206 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:36:23.875631 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:36:23.902514 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:36:23.864023 => 23:36:23.902070
+[0m23:36:23.904441 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:36:23.988811 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:36:24.002212 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:36:24.003732 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:36:24.004880 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:36:24.019446 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:36:24.021295 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:36:24.023126 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT
+customerid,
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+contracttype,
+internetservice,
+COALESCE(totalcharges,0) AS totalcharges, 
+techsupport,
+churn
+FROM raw.customer_churn_raw
+  );
+[0m23:36:24.028004 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.0 seconds
+[0m23:36:24.037447 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:36:24.039454 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+alter table "analytics"."staging"."stg_churn__dbt_tmp" rename to "stg_churn"
+[0m23:36:24.042130 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.0 seconds
+[0m23:36:24.062074 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: COMMIT
+[0m23:36:24.064076 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:36:24.065918 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: COMMIT
+[0m23:36:24.074003 [debug] [Thread-1 (]: SQL status: COMMIT in 0.0 seconds
+[0m23:36:24.082603 [debug] [Thread-1 (]: Applying DROP to: "analytics"."staging"."stg_churn__dbt_backup"
+[0m23:36:24.088725 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:36:24.090476 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+drop view if exists "analytics"."staging"."stg_churn__dbt_backup" cascade
+[0m23:36:24.114618 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.0 seconds
+[0m23:36:24.117738 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:36:23.906023 => 23:36:24.117509
+[0m23:36:24.119518 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:36:24.121615 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b87403d0>]}
+[0m23:36:24.124026 [info ] [Thread-1 (]: 1 of 2 OK created sql view model staging.stg_churn ............................. [[32mCREATE VIEW[0m in 0.26s]
+[0m23:36:24.127141 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:36:24.129576 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:36:24.131648 [info ] [Thread-1 (]: 2 of 2 START sql table model staging.churn_report .............................. [RUN]
+[0m23:36:24.134511 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.churn_pipeline.stg_churn, now model.churn_pipeline.churn_report)
+[0m23:36:24.136631 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.churn_report
+[0m23:36:24.142664 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.churn_report"
+[0m23:36:24.168055 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.churn_report (compile): 23:36:24.138212 => 23:36:24.167469
+[0m23:36:24.170381 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.churn_report
+[0m23:36:24.209785 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.churn_report"
+[0m23:36:24.231728 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:36:24.233394 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: BEGIN
+[0m23:36:24.235000 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:36:24.511618 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:36:24.515183 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:36:24.518549 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.churn_report"} */
+
+  
+    
+
+  create  table "analytics"."staging"."churn_report__dbt_tmp"
+  
+  
+    as
+  
+  (
+    SELECT
+contractType,
+COUNT(*) AS totalCustomers,
+SUM(CASE WHEN churn='Yes' THEN 1 ELSE 0 END) AS churnedCustomers,
+AVG(monthlycharges) AS avgMonthlyCharge,
+AVG(tenure) AS avgTenure
+FROM "analytics"."staging"."stg_churn"
+GROUP BY contractType
+  );
+  
+[0m23:36:24.606842 [debug] [Thread-1 (]: SQL status: SELECT 0 in 0.0 seconds
+[0m23:36:24.670642 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:36:24.672592 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.churn_report"} */
+alter table "analytics"."staging"."churn_report__dbt_tmp" rename to "churn_report"
+[0m23:36:24.675240 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.0 seconds
+[0m23:36:24.683770 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: COMMIT
+[0m23:36:24.685740 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:36:24.687646 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: COMMIT
+[0m23:36:24.695498 [debug] [Thread-1 (]: SQL status: COMMIT in 0.0 seconds
+[0m23:36:24.700504 [debug] [Thread-1 (]: Applying DROP to: "analytics"."staging"."churn_report__dbt_backup"
+[0m23:36:24.705710 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:36:24.707602 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.churn_report"} */
+drop table if exists "analytics"."staging"."churn_report__dbt_backup" cascade
+[0m23:36:24.709743 [debug] [Thread-1 (]: SQL status: DROP TABLE in 0.0 seconds
+[0m23:36:24.713552 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.churn_report (execute): 23:36:24.171689 => 23:36:24.713301
+[0m23:36:24.715495 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: Close
+[0m23:36:24.718297 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c54c9b0d-2dda-4fd8-a4e4-aced1f3878a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b99d5900>]}
+[0m23:36:24.739529 [info ] [Thread-1 (]: 2 of 2 OK created sql table model staging.churn_report ......................... [[32mSELECT 0[0m in 0.58s]
+[0m23:36:24.741841 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:36:24.745168 [debug] [MainThread]: Using postgres connection "master"
+[0m23:36:24.746584 [debug] [MainThread]: On master: BEGIN
+[0m23:36:24.748153 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:36:24.838705 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:36:24.842254 [debug] [MainThread]: On master: COMMIT
+[0m23:36:24.845361 [debug] [MainThread]: Using postgres connection "master"
+[0m23:36:24.848529 [debug] [MainThread]: On master: COMMIT
+[0m23:36:24.852351 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:36:24.855668 [debug] [MainThread]: On master: Close
+[0m23:36:24.858854 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:36:24.863317 [debug] [MainThread]: Connection 'model.churn_pipeline.churn_report' was properly closed.
+[0m23:36:24.865533 [info ] [MainThread]: 
+[0m23:36:24.867995 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 1.24 seconds (1.24s).
+[0m23:36:24.871447 [debug] [MainThread]: Command end result
+[0m23:36:24.919723 [info ] [MainThread]: 
+[0m23:36:24.922717 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m23:36:24.924819 [info ] [MainThread]: 
+[0m23:36:24.927054 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 TOTAL=2
+[0m23:36:24.935790 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 2.768096, "process_user_time": 5.428645, "process_kernel_time": 0.839169, "process_mem_max_rss": "110180", "process_in_blocks": "216", "process_out_blocks": "664"}
+[0m23:36:24.939164 [debug] [MainThread]: Command `dbt run` succeeded at 23:36:24.938623 after 2.77 seconds
+[0m23:36:24.942161 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7bd7abbb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b99d7c40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa7b9c0d5a0>]}
+[0m23:36:24.944060 [debug] [MainThread]: Flushing usage events
+[0m23:49:53.289044 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804d793b80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804b4adf30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804b4aded0>]}
+
+
+============================== 23:49:53.432230 | 8abab129-fb15-4385-8102-ecb71bde2f4a ==============================
+[0m23:49:53.432230 [info ] [MainThread]: Running with dbt=1.7.0
+[0m23:49:53.442110 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/usr/app', 'debug': 'False', 'version_check': 'True', 'log_path': '/usr/app/logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'static_parser': 'True', 'log_format': 'default', 'target_path': 'None', 'invocation_command': 'dbt run', 'send_anonymous_usage_stats': 'True'}
+[0m23:49:54.113583 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804b4f0580>]}
+[0m23:49:54.248949 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708049a364d0>]}
+[0m23:49:54.251418 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m23:49:54.277492 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m23:49:54.512112 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m23:49:54.514607 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m23:49:54.582833 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708049a040d0>]}
+[0m23:49:54.752506 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7080499c5d80>]}
+[0m23:49:54.754835 [info ] [MainThread]: Found 2 models, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m23:49:54.757611 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7080499c5c90>]}
+[0m23:49:54.762748 [info ] [MainThread]: 
+[0m23:49:54.766201 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m23:49:54.770363 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics'
+[0m23:49:54.796379 [debug] [ThreadPool]: Using postgres connection "list_analytics"
+[0m23:49:54.798954 [debug] [ThreadPool]: On list_analytics: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m23:49:54.801192 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:49:54.821305 [debug] [ThreadPool]: SQL status: SELECT 7 in 0.0 seconds
+[0m23:49:54.825040 [debug] [ThreadPool]: On list_analytics: Close
+[0m23:49:54.829459 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics, now list_analytics_staging)
+[0m23:49:54.845079 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:49:54.846593 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m23:49:54.847901 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m23:49:54.861316 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m23:49:54.862963 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m23:49:54.864293 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m23:49:54.877719 [debug] [ThreadPool]: SQL status: SELECT 2 in 0.0 seconds
+[0m23:49:54.880341 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m23:49:54.881915 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m23:49:54.890930 [debug] [MainThread]: Using postgres connection "master"
+[0m23:49:54.892863 [debug] [MainThread]: On master: BEGIN
+[0m23:49:54.894541 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:49:54.907348 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:49:54.909418 [debug] [MainThread]: Using postgres connection "master"
+[0m23:49:54.911231 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m23:49:54.938742 [debug] [MainThread]: SQL status: SELECT 1 in 0.0 seconds
+[0m23:49:54.941500 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7080498474f0>]}
+[0m23:49:54.943339 [debug] [MainThread]: On master: ROLLBACK
+[0m23:49:54.945171 [debug] [MainThread]: Using postgres connection "master"
+[0m23:49:54.946812 [debug] [MainThread]: On master: BEGIN
+[0m23:49:54.949038 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:49:54.950573 [debug] [MainThread]: On master: COMMIT
+[0m23:49:54.951899 [debug] [MainThread]: Using postgres connection "master"
+[0m23:49:54.953181 [debug] [MainThread]: On master: COMMIT
+[0m23:49:54.954728 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:49:54.956067 [debug] [MainThread]: On master: Close
+[0m23:49:54.957796 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m23:49:54.959614 [info ] [MainThread]: 
+[0m23:49:54.976473 [debug] [Thread-1 (]: Began running node model.churn_pipeline.stg_churn
+[0m23:49:54.978676 [info ] [Thread-1 (]: 1 of 2 START sql view model staging.stg_churn .................................. [RUN]
+[0m23:49:54.981529 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now model.churn_pipeline.stg_churn)
+[0m23:49:54.983731 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.stg_churn
+[0m23:49:54.997628 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.stg_churn"
+[0m23:49:55.013387 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (compile): 23:49:54.985425 => 23:49:55.012895
+[0m23:49:55.014999 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.stg_churn
+[0m23:49:55.067203 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.stg_churn"
+[0m23:49:55.083376 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:49:55.085538 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: BEGIN
+[0m23:49:55.088496 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:49:55.105743 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:49:55.107704 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:49:55.109599 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+
+  create view "analytics"."staging"."stg_churn__dbt_tmp"
+    
+    
+  as (
+    SELECT
+customerid,
+age,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+contracttype,
+internetservice,
+COALESCE(totalcharges,0) AS totalcharges, 
+techsupport,
+churn
+FROM raw.customer_churn_raw
+  );
+[0m23:49:55.158249 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.0 seconds
+[0m23:49:55.170153 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:49:55.172264 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+alter table "analytics"."staging"."stg_churn" rename to "stg_churn__dbt_backup"
+[0m23:49:55.174618 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.0 seconds
+[0m23:49:55.179973 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:49:55.181715 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+alter table "analytics"."staging"."stg_churn__dbt_tmp" rename to "stg_churn"
+[0m23:49:55.184871 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.0 seconds
+[0m23:49:55.209737 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: COMMIT
+[0m23:49:55.211678 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:49:55.213700 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: COMMIT
+[0m23:49:55.222910 [debug] [Thread-1 (]: SQL status: COMMIT in 0.0 seconds
+[0m23:49:55.231949 [debug] [Thread-1 (]: Applying DROP to: "analytics"."staging"."stg_churn__dbt_backup"
+[0m23:49:55.239431 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.stg_churn"
+[0m23:49:55.241541 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.stg_churn"} */
+drop view if exists "analytics"."staging"."stg_churn__dbt_backup" cascade
+[0m23:49:55.248479 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.0 seconds
+[0m23:49:55.251768 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.stg_churn (execute): 23:49:55.016265 => 23:49:55.251512
+[0m23:49:55.253528 [debug] [Thread-1 (]: On model.churn_pipeline.stg_churn: Close
+[0m23:49:55.255951 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804988bf40>]}
+[0m23:49:55.258183 [info ] [Thread-1 (]: 1 of 2 OK created sql view model staging.stg_churn ............................. [[32mCREATE VIEW[0m in 0.28s]
+[0m23:49:55.261369 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.stg_churn
+[0m23:49:55.265024 [debug] [Thread-1 (]: Began running node model.churn_pipeline.churn_report
+[0m23:49:55.267382 [info ] [Thread-1 (]: 2 of 2 START sql table model staging.churn_report .............................. [RUN]
+[0m23:49:55.270328 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.churn_pipeline.stg_churn, now model.churn_pipeline.churn_report)
+[0m23:49:55.272574 [debug] [Thread-1 (]: Began compiling node model.churn_pipeline.churn_report
+[0m23:49:55.279357 [debug] [Thread-1 (]: Writing injected SQL for node "model.churn_pipeline.churn_report"
+[0m23:49:55.293092 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.churn_report (compile): 23:49:55.274494 => 23:49:55.292411
+[0m23:49:55.294624 [debug] [Thread-1 (]: Began executing node model.churn_pipeline.churn_report
+[0m23:49:55.326655 [debug] [Thread-1 (]: Writing runtime sql for node "model.churn_pipeline.churn_report"
+[0m23:49:55.342455 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:49:55.344244 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: BEGIN
+[0m23:49:55.345785 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m23:49:55.669363 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m23:49:55.671917 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:49:55.674521 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.churn_report"} */
+
+  
+    
+
+  create  table "analytics"."staging"."churn_report__dbt_tmp"
+  
+  
+    as
+  
+  (
+    SELECT
+contractType,
+COUNT(*) AS totalCustomers,
+SUM(CASE WHEN churn='Yes' THEN 1 ELSE 0 END) AS churnedCustomers,
+AVG(monthlycharges) AS avgMonthlyCharge,
+AVG(tenure) AS avgTenure
+FROM "analytics"."staging"."stg_churn"
+GROUP BY contractType
+  );
+  
+[0m23:49:55.792163 [debug] [Thread-1 (]: SQL status: SELECT 3 in 0.0 seconds
+[0m23:49:55.798567 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:49:55.800745 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.churn_report"} */
+alter table "analytics"."staging"."churn_report" rename to "churn_report__dbt_backup"
+[0m23:49:55.803334 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.0 seconds
+[0m23:49:55.808967 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:49:55.812455 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.churn_report"} */
+alter table "analytics"."staging"."churn_report__dbt_tmp" rename to "churn_report"
+[0m23:49:55.814941 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.0 seconds
+[0m23:49:55.851055 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: COMMIT
+[0m23:49:55.854678 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:49:55.858111 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: COMMIT
+[0m23:49:55.864076 [debug] [Thread-1 (]: SQL status: COMMIT in 0.0 seconds
+[0m23:49:55.875800 [debug] [Thread-1 (]: Applying DROP to: "analytics"."staging"."churn_report__dbt_backup"
+[0m23:49:55.887571 [debug] [Thread-1 (]: Using postgres connection "model.churn_pipeline.churn_report"
+[0m23:49:55.893864 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "model.churn_pipeline.churn_report"} */
+drop table if exists "analytics"."staging"."churn_report__dbt_backup" cascade
+[0m23:49:55.904582 [debug] [Thread-1 (]: SQL status: DROP TABLE in 0.0 seconds
+[0m23:49:55.913830 [debug] [Thread-1 (]: Timing info for model.churn_pipeline.churn_report (execute): 23:49:55.295697 => 23:49:55.913176
+[0m23:49:55.917313 [debug] [Thread-1 (]: On model.churn_pipeline.churn_report: Close
+[0m23:49:55.920276 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8abab129-fb15-4385-8102-ecb71bde2f4a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804988bf40>]}
+[0m23:49:55.925650 [info ] [Thread-1 (]: 2 of 2 OK created sql table model staging.churn_report ......................... [[32mSELECT 3[0m in 0.65s]
+[0m23:49:55.928411 [debug] [Thread-1 (]: Finished running node model.churn_pipeline.churn_report
+[0m23:49:55.934063 [debug] [MainThread]: Using postgres connection "master"
+[0m23:49:55.936168 [debug] [MainThread]: On master: BEGIN
+[0m23:49:55.938930 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m23:49:56.080428 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m23:49:56.083590 [debug] [MainThread]: On master: COMMIT
+[0m23:49:56.086864 [debug] [MainThread]: Using postgres connection "master"
+[0m23:49:56.091229 [debug] [MainThread]: On master: COMMIT
+[0m23:49:56.094129 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m23:49:56.098913 [debug] [MainThread]: On master: Close
+[0m23:49:56.101653 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:49:56.103530 [debug] [MainThread]: Connection 'model.churn_pipeline.churn_report' was properly closed.
+[0m23:49:56.109491 [info ] [MainThread]: 
+[0m23:49:56.116335 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 1.34 seconds (1.34s).
+[0m23:49:56.121809 [debug] [MainThread]: Command end result
+[0m23:49:56.184597 [info ] [MainThread]: 
+[0m23:49:56.187653 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m23:49:56.192729 [info ] [MainThread]: 
+[0m23:49:56.195227 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 TOTAL=2
+[0m23:49:56.204386 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 2.998855, "process_user_time": 5.862211, "process_kernel_time": 0.771591, "process_mem_max_rss": "107888", "process_in_blocks": "488", "process_out_blocks": "664"}
+[0m23:49:56.209553 [debug] [MainThread]: Command `dbt run` succeeded at 23:49:56.209162 after 3.00 seconds
+[0m23:49:56.211585 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804d793b80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7080499061a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708049905c00>]}
+[0m23:49:56.213532 [debug] [MainThread]: Flushing usage events

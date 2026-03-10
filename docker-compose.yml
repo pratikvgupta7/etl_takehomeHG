@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: analytics
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+
+  ingestion:
+    build: ./app
+    volumes:
+      - ./data:/data
+    environment:
+      DB_HOST: postgres
+      DB_NAME: analytics
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      - postgres
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.7.0
+    volumes:
+      - ./dbt_project:/usr/app
+    working_dir: /usr/app
+    depends_on:
+      - postgres
+
+  metabase:
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres

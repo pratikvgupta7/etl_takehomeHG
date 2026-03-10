@@ -1,0 +1,1 @@
+{"_invocation_id": "8abab129-fb15-4385-8102-ecb71bde2f4a", "linked": {"0": {"name": "model.churn_pipeline.churn_report", "type": "model"}, "1": {"name": "model.churn_pipeline.stg_churn", "type": "model", "succ": [0]}}}
