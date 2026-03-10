@@ -1,0 +1,12 @@
+SELECT 
+customerID ,
+age ,
+COALESCE(gender,'Unknown') AS gender,
+COALESCE(tenure,0) AS tenure,
+COALESCE(monthlycharges,0) AS monthlycharges,
+ContractType,
+InternetService,
+COALESCE(totalcharges,0) AS totalcharges, 
+TechSupport,
+Churn,
+md5(customerid) AS customerhash, 
