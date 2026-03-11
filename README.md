@@ -101,6 +101,3 @@ Metabase runs at:
 **http://localhost:3000**
 Connect Metabase to the Postgres database to visualize the reporting tables.
 docker compose up
-
-Dashboard
-http://localhost:3000
