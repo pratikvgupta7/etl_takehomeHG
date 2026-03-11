@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_churn
+    columns:
+      - name: customerid
+        tests:
+          - not_null
+
+      - name: churn
+        tests:
+          - accepted_values:
+              values: ['Yes', 'No', 'Unknown']
+
+      - name: contracttype
+        tests:
+          - not_null
+
+  - name: churn_report
+    columns:
+      - name: contracttype
+        tests:
+          - not_null

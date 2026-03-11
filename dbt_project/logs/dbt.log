@@ -2734,3 +2734,325 @@ drop table if exists "analytics"."staging"."churn_report__dbt_backup" cascade
 [0m23:49:56.209553 [debug] [MainThread]: Command `dbt run` succeeded at 23:49:56.209162 after 3.00 seconds
 [0m23:49:56.211585 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70804d793b80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7080499061a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708049905c00>]}
 [0m23:49:56.213532 [debug] [MainThread]: Flushing usage events
+[0m00:04:15.890170 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82e4e7c40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82c1f5f90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82c1f5f30>]}
+
+
+============================== 00:04:15.899045 | 3a81b650-4712-416e-b728-885f2a05f3db ==============================
+[0m00:04:15.899045 [info ] [MainThread]: Running with dbt=1.7.0
+[0m00:04:15.901238 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'profiles_dir': '/usr/app', 'log_path': '/usr/app/logs', 'debug': 'False', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'static_parser': 'True', 'log_format': 'default', 'target_path': 'None', 'invocation_command': 'dbt test', 'send_anonymous_usage_stats': 'True'}
+[0m00:04:16.238262 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '3a81b650-4712-416e-b728-885f2a05f3db', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82aa00f10>]}
+[0m00:04:16.504199 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '3a81b650-4712-416e-b728-885f2a05f3db', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82a97eb60>]}
+[0m00:04:16.508042 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m00:04:16.572138 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m00:04:16.838605 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 1 files added, 0 files changed.
+[0m00:04:16.840868 [debug] [MainThread]: Partial parsing: added file: churn_pipeline://models/schema.yml
+[0m00:04:17.593605 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '3a81b650-4712-416e-b728-885f2a05f3db', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82a5100d0>]}
+[0m00:04:17.816571 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '3a81b650-4712-416e-b728-885f2a05f3db', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82a6ff580>]}
+[0m00:04:17.819835 [info ] [MainThread]: Found 2 models, 4 tests, 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m00:04:17.822043 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3a81b650-4712-416e-b728-885f2a05f3db', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82a6ff610>]}
+[0m00:04:17.828353 [info ] [MainThread]: 
+[0m00:04:17.832151 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m00:04:17.839772 [debug] [ThreadPool]: Acquiring new postgres connection 'list_analytics_staging'
+[0m00:04:17.981218 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m00:04:18.005431 [debug] [ThreadPool]: On list_analytics_staging: BEGIN
+[0m00:04:18.007985 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:04:18.058772 [debug] [ThreadPool]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:18.060708 [debug] [ThreadPool]: Using postgres connection "list_analytics_staging"
+[0m00:04:18.062027 [debug] [ThreadPool]: On list_analytics_staging: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "list_analytics_staging"} */
+select
+      'analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+  
+[0m00:04:18.068814 [debug] [ThreadPool]: SQL status: SELECT 2 in 0.0 seconds
+[0m00:04:18.072825 [debug] [ThreadPool]: On list_analytics_staging: ROLLBACK
+[0m00:04:18.075981 [debug] [ThreadPool]: On list_analytics_staging: Close
+[0m00:04:18.117092 [debug] [MainThread]: Using postgres connection "master"
+[0m00:04:18.118842 [debug] [MainThread]: On master: BEGIN
+[0m00:04:18.120459 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m00:04:18.179200 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:18.180712 [debug] [MainThread]: Using postgres connection "master"
+[0m00:04:18.181973 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m00:04:18.212631 [debug] [MainThread]: SQL status: SELECT 1 in 0.0 seconds
+[0m00:04:18.215398 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3a81b650-4712-416e-b728-885f2a05f3db', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82a839750>]}
+[0m00:04:18.217305 [debug] [MainThread]: On master: ROLLBACK
+[0m00:04:18.219272 [debug] [MainThread]: Using postgres connection "master"
+[0m00:04:18.220615 [debug] [MainThread]: On master: BEGIN
+[0m00:04:18.222661 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:18.224229 [debug] [MainThread]: On master: COMMIT
+[0m00:04:18.226023 [debug] [MainThread]: Using postgres connection "master"
+[0m00:04:18.227521 [debug] [MainThread]: On master: COMMIT
+[0m00:04:18.229680 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m00:04:18.231365 [debug] [MainThread]: On master: Close
+[0m00:04:18.233475 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m00:04:18.257098 [info ] [MainThread]: 
+[0m00:04:18.273506 [debug] [Thread-1 (]: Began running node test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1
+[0m00:04:18.276673 [info ] [Thread-1 (]: 1 of 4 START test accepted_values_stg_churn_churn__Yes__No__Unknown ............ [RUN]
+[0m00:04:18.282068 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_staging, now test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1)
+[0m00:04:18.285046 [debug] [Thread-1 (]: Began compiling node test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1
+[0m00:04:18.302011 [debug] [Thread-1 (]: Writing injected SQL for node "test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1"
+[0m00:04:18.322851 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1 (compile): 00:04:18.287503 => 00:04:18.322162
+[0m00:04:18.324715 [debug] [Thread-1 (]: Began executing node test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1
+[0m00:04:18.475806 [debug] [Thread-1 (]: Writing runtime sql for node "test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1"
+[0m00:04:18.494694 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1"
+[0m00:04:18.496313 [debug] [Thread-1 (]: On test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1: BEGIN
+[0m00:04:18.497772 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m00:04:18.523989 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:18.525624 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1"
+[0m00:04:18.527068 [debug] [Thread-1 (]: On test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1"} */
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+    
+
+with all_values as (
+
+    select
+        churn as value_field,
+        count(*) as n_records
+
+    from "analytics"."staging"."stg_churn"
+    group by churn
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'Yes','No','Unknown'
+)
+
+
+
+      
+    ) dbt_internal_test
+[0m00:04:18.530578 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.0 seconds
+[0m00:04:18.534890 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1 (execute): 00:04:18.326248 => 00:04:18.534293
+[0m00:04:18.536284 [debug] [Thread-1 (]: On test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1: ROLLBACK
+[0m00:04:18.537917 [debug] [Thread-1 (]: On test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1: Close
+[0m00:04:18.539974 [info ] [Thread-1 (]: 1 of 4 PASS accepted_values_stg_churn_churn__Yes__No__Unknown .................. [[32mPASS[0m in 0.26s]
+[0m00:04:18.544552 [debug] [Thread-1 (]: Finished running node test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1
+[0m00:04:18.546753 [debug] [Thread-1 (]: Began running node test.churn_pipeline.not_null_churn_report_contracttype.6b14821833
+[0m00:04:18.548390 [info ] [Thread-1 (]: 2 of 4 START test not_null_churn_report_contracttype ........................... [RUN]
+[0m00:04:18.552120 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.churn_pipeline.accepted_values_stg_churn_churn__Yes__No__Unknown.e265cef3b1, now test.churn_pipeline.not_null_churn_report_contracttype.6b14821833)
+[0m00:04:18.553884 [debug] [Thread-1 (]: Began compiling node test.churn_pipeline.not_null_churn_report_contracttype.6b14821833
+[0m00:04:18.569011 [debug] [Thread-1 (]: Writing injected SQL for node "test.churn_pipeline.not_null_churn_report_contracttype.6b14821833"
+[0m00:04:18.579918 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.not_null_churn_report_contracttype.6b14821833 (compile): 00:04:18.555189 => 00:04:18.579207
+[0m00:04:18.587873 [debug] [Thread-1 (]: Began executing node test.churn_pipeline.not_null_churn_report_contracttype.6b14821833
+[0m00:04:18.594987 [debug] [Thread-1 (]: Writing runtime sql for node "test.churn_pipeline.not_null_churn_report_contracttype.6b14821833"
+[0m00:04:18.611618 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.not_null_churn_report_contracttype.6b14821833"
+[0m00:04:18.615971 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_churn_report_contracttype.6b14821833: BEGIN
+[0m00:04:18.618322 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m00:04:18.662411 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:18.664206 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.not_null_churn_report_contracttype.6b14821833"
+[0m00:04:18.665551 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_churn_report_contracttype.6b14821833: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "test.churn_pipeline.not_null_churn_report_contracttype.6b14821833"} */
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+    
+
+
+
+select contracttype
+from "analytics"."staging"."churn_report"
+where contracttype is null
+
+
+
+      
+    ) dbt_internal_test
+[0m00:04:18.669157 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.0 seconds
+[0m00:04:18.672209 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.not_null_churn_report_contracttype.6b14821833 (execute): 00:04:18.589412 => 00:04:18.671847
+[0m00:04:18.673541 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_churn_report_contracttype.6b14821833: ROLLBACK
+[0m00:04:18.675034 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_churn_report_contracttype.6b14821833: Close
+[0m00:04:18.676987 [info ] [Thread-1 (]: 2 of 4 PASS not_null_churn_report_contracttype ................................. [[32mPASS[0m in 0.13s]
+[0m00:04:18.679789 [debug] [Thread-1 (]: Finished running node test.churn_pipeline.not_null_churn_report_contracttype.6b14821833
+[0m00:04:18.682072 [debug] [Thread-1 (]: Began running node test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7
+[0m00:04:18.684104 [info ] [Thread-1 (]: 3 of 4 START test not_null_stg_churn_contracttype .............................. [RUN]
+[0m00:04:18.686870 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.churn_pipeline.not_null_churn_report_contracttype.6b14821833, now test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7)
+[0m00:04:18.689044 [debug] [Thread-1 (]: Began compiling node test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7
+[0m00:04:18.769904 [debug] [Thread-1 (]: Writing injected SQL for node "test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7"
+[0m00:04:18.780550 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7 (compile): 00:04:18.690292 => 00:04:18.779816
+[0m00:04:18.782266 [debug] [Thread-1 (]: Began executing node test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7
+[0m00:04:18.786780 [debug] [Thread-1 (]: Writing runtime sql for node "test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7"
+[0m00:04:18.799238 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7"
+[0m00:04:18.801359 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7: BEGIN
+[0m00:04:18.803424 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m00:04:18.847227 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:18.849292 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7"
+[0m00:04:18.851796 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7"} */
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+    
+
+
+
+select contracttype
+from "analytics"."staging"."stg_churn"
+where contracttype is null
+
+
+
+      
+    ) dbt_internal_test
+[0m00:04:18.856765 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.0 seconds
+[0m00:04:18.860690 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7 (execute): 00:04:18.783510 => 00:04:18.860317
+[0m00:04:18.862431 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7: ROLLBACK
+[0m00:04:18.864581 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7: Close
+[0m00:04:18.867631 [info ] [Thread-1 (]: 3 of 4 PASS not_null_stg_churn_contracttype .................................... [[32mPASS[0m in 0.18s]
+[0m00:04:18.870614 [debug] [Thread-1 (]: Finished running node test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7
+[0m00:04:18.872527 [debug] [Thread-1 (]: Began running node test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a
+[0m00:04:18.874453 [info ] [Thread-1 (]: 4 of 4 START test not_null_stg_churn_customerid ................................ [RUN]
+[0m00:04:18.877165 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.churn_pipeline.not_null_stg_churn_contracttype.62d0e9b9e7, now test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a)
+[0m00:04:18.879279 [debug] [Thread-1 (]: Began compiling node test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a
+[0m00:04:18.888159 [debug] [Thread-1 (]: Writing injected SQL for node "test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a"
+[0m00:04:18.901423 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a (compile): 00:04:18.880933 => 00:04:18.900566
+[0m00:04:18.903337 [debug] [Thread-1 (]: Began executing node test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a
+[0m00:04:18.907982 [debug] [Thread-1 (]: Writing runtime sql for node "test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a"
+[0m00:04:18.924754 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a"
+[0m00:04:18.926377 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a: BEGIN
+[0m00:04:18.927854 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m00:04:18.947428 [debug] [Thread-1 (]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:18.949102 [debug] [Thread-1 (]: Using postgres connection "test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a"
+[0m00:04:18.950404 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a: /* {"app": "dbt", "dbt_version": "1.7.0", "profile_name": "churn_profile", "target_name": "dev", "node_id": "test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a"} */
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+    
+
+
+
+select customerid
+from "analytics"."staging"."stg_churn"
+where customerid is null
+
+
+
+      
+    ) dbt_internal_test
+[0m00:04:18.953112 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.0 seconds
+[0m00:04:18.955833 [debug] [Thread-1 (]: Timing info for test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a (execute): 00:04:18.904344 => 00:04:18.955498
+[0m00:04:18.957044 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a: ROLLBACK
+[0m00:04:18.958470 [debug] [Thread-1 (]: On test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a: Close
+[0m00:04:18.960360 [info ] [Thread-1 (]: 4 of 4 PASS not_null_stg_churn_customerid ...................................... [[32mPASS[0m in 0.08s]
+[0m00:04:18.963020 [debug] [Thread-1 (]: Finished running node test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a
+[0m00:04:18.967934 [debug] [MainThread]: Using postgres connection "master"
+[0m00:04:18.969634 [debug] [MainThread]: On master: BEGIN
+[0m00:04:18.971228 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m00:04:19.027681 [debug] [MainThread]: SQL status: BEGIN in 0.0 seconds
+[0m00:04:19.029177 [debug] [MainThread]: On master: COMMIT
+[0m00:04:19.030630 [debug] [MainThread]: Using postgres connection "master"
+[0m00:04:19.032105 [debug] [MainThread]: On master: COMMIT
+[0m00:04:19.033649 [debug] [MainThread]: SQL status: COMMIT in 0.0 seconds
+[0m00:04:19.035156 [debug] [MainThread]: On master: Close
+[0m00:04:19.037582 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m00:04:19.039606 [debug] [MainThread]: Connection 'test.churn_pipeline.not_null_stg_churn_customerid.55ee5c6a8a' was properly closed.
+[0m00:04:19.041154 [info ] [MainThread]: 
+[0m00:04:19.042970 [info ] [MainThread]: Finished running 4 tests in 0 hours 0 minutes and 1.21 seconds (1.21s).
+[0m00:04:19.046911 [debug] [MainThread]: Command end result
+[0m00:04:19.077930 [info ] [MainThread]: 
+[0m00:04:19.081563 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m00:04:19.085154 [info ] [MainThread]: 
+[0m00:04:19.087611 [info ] [MainThread]: Done. PASS=4 WARN=0 ERROR=0 SKIP=0 TOTAL=4
+[0m00:04:19.091280 [debug] [MainThread]: Resource report: {"command_name": "test", "command_success": true, "command_wall_clock_time": 3.2847507, "process_user_time": 7.454837, "process_kernel_time": 2.914372, "process_mem_max_rss": "109616", "process_in_blocks": "440", "process_out_blocks": "664"}
+[0m00:04:19.093616 [debug] [MainThread]: Command `dbt test` succeeded at 00:04:19.093355 after 3.29 seconds
+[0m00:04:19.095265 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82e4e7c40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82a739a20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7db82c8c9660>]}
+[0m00:04:19.097604 [debug] [MainThread]: Flushing usage events
