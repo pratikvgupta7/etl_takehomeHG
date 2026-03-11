@@ -81,8 +81,8 @@ http://localhost:4200
 
 ----------------------------------------------------------Running the Pipeline-------------------------------------------------------
 1. Clone repository
-****git clone <repo>**
-**cd etl_takehomeHG****
+**git clone <repo>**
+**cd etl_takehomeHG**
 2. Start infrastructure
 **docker compose up -d postgres metabase prefect-server**
 3. Start the Prefect pipeline runner
