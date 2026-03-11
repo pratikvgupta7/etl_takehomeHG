@@ -1,15 +1,18 @@
 This project implements a containerized ELT data pipeline that ingests customer churn data, transforms it using dbt, and orchestrates the workflow using Prefect.
 The system is designed to be easy to run locally, fully open-source, and modular, enabling the pipeline to be extended for production environments.
 
+
 Architecture
 The pipeline follows a modern ELT architecture:
 CSV → Python → Postgres (Raw/Staging Tables) → dbt → Analytics Tables → Metabase Dashboards
 Workflow orchestration and scheduling are handled by Prefect.
 
+
 Components
 Data Source
 Customer churn dataset:
 https://www.kaggle.com/datasets/abdullah0a/telecom-customer-churn-insights-for-analysis
+
 
 
 Postgres
@@ -19,6 +22,7 @@ staging.stg_churn — cleaned and standardized data
 production.churn_report — aggregated reporting tables
 
 
+
 Python Ingestion Layer
 app/ingest.py
 Responsibilities:
@@ -26,6 +30,7 @@ Load CSV dataset
 Standardize column names
 Insert rows into Postgres raw table
 Track ingestion timestamp
+
 
 
 dbt Transformation Layer
@@ -41,6 +46,7 @@ Example transformations include:
 Models:
 dbt_project/models/staging/stg_churn.sql
 dbt_project/models/marts/churn_report.sql
+
 
 
 Prefect orchestrates the pipeline execution.
@@ -70,17 +76,20 @@ Prefect UI:
 http://localhost:4200
 
 
-Running the Pipeline
+
+
+
+----------------------------------------------------------Running the Pipeline-------------------------------------------------------
 1. Clone repository
-git clone <repo>
-cd etl_takehomeHG
+**git clone <repo>
+cd etl_takehomeHG**
 2. Start infrastructure
-docker compose up -d postgres metabase prefect-server
+**docker compose up -d postgres metabase prefect-server**
 3. Start the Prefect pipeline runner
-docker compose up -d prefect
+**docker compose up -d prefect**
 The runner registers the deployment and begins listening for scheduled runs.
 4. Open Prefect UI
-http://localhost:4200
+**http://localhost:4200**
 From the dashboard you can:
 - view scheduled runs
 - trigger manual runs
@@ -89,10 +98,8 @@ From the dashboard you can:
 
 Running Metabase
 Metabase runs at:
-http://localhost:3000
+**http://localhost:3000**
 Connect Metabase to the Postgres database to visualize the reporting tables.
-
-Run Instructions
 docker compose up
 
 Dashboard
